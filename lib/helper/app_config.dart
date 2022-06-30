@@ -35,3 +35,36 @@ class App {
     return _widthPadding! * v;
   }
 }
+
+
+class AppColors {
+  static Color backgraundDark = const Color(0xFF002359);
+  static Color backgraundDarkAcik = const Color(0xFF02327E);
+
+  static Color backgraundLight = const Color(0xffffffff);
+  static Color backgraundLightKoyu = const Color(0xFF39547D);
+
+  static Color textColorDark = const Color(0xffffffff);
+  static Color textColorLight = const Color(0xFF002359);
+}
+
+ThemeData darkTheme = ThemeData(
+    brightness: Brightness.dark,
+    backgroundColor: AppColors.backgraundDark,
+    scaffoldBackgroundColor: AppColors.backgraundDark,
+    hintColor: AppColors.textColorLight,
+    primaryColor: AppColors.backgraundDark,
+    cardColor: AppColors.backgraundDarkAcik,
+    appBarTheme: AppBarTheme(backgroundColor: AppColors.backgraundDarkAcik),
+    textTheme: TextTheme(headline1: TextStyle(color: AppColors.textColorLight))
+);
+
+ThemeData lightTheme = ThemeData(
+    brightness: Brightness.light,
+    backgroundColor: AppColors.backgraundLight,
+    scaffoldBackgroundColor: AppColors.backgraundLight,
+    hintColor: AppColors.textColorLight,
+    primaryColor: AppColors.backgraundLight,
+    cardColor: AppColors.backgraundLightKoyu,
+    appBarTheme: AppBarTheme(backgroundColor: AppColors.backgraundLightKoyu),
+    textTheme: TextTheme(headline1: TextStyle(color: AppColors.textColorDark)));

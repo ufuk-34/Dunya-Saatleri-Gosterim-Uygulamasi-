@@ -33,7 +33,7 @@ class _PageSecondaryState extends State<PageSecondary> {
           borderRadius: BorderRadius.circular(20),
         ),
       ),
-      body: Obx(() => _con.clock.value == null
+      body: Obx(() => _con.clock.value!.timezone == null
           ? Center(child: CircularProgressIndicator())
           : Container(
               child: Container(

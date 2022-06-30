@@ -28,8 +28,18 @@ class _PagePrimaryState extends State<PagePrimary> {
         leading: Text(""),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20),
-
         ),
+        actions: [
+          InkWell(
+            onTap: () {
+              Get.isDarkMode ? Get.changeThemeMode(ThemeMode.light):Get.changeThemeMode(ThemeMode.dark);
+            },
+            child:   Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Icon(Get.isDarkMode ? Icons.light_mode_outlined:Icons.dark_mode_outlined),
+            ),
+          )
+        ],
       ),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
