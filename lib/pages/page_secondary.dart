@@ -37,7 +37,7 @@ class _PageSecondaryState extends State<PageSecondary> {
             onTap: (){
               Navigator.pop(context);
             },
-            child: Icon(Icons.arrow_back,color: Theme.of(context).hintColor)),
+            child: Icon(Icons.arrow_back,color: Theme.of(context).canvasColor)),
       ),
       body: Obx(() => _con.clock.value!.timezone == null
           ? const Center(child: CircularProgressIndicator())
