@@ -1,0 +1,6 @@
+package com.example.dunya_saatleri_gosterim_uygulamasi
+
+import io.flutter.embedding.android.FlutterActivity
+
+class MainActivity: FlutterActivity() {
+}
