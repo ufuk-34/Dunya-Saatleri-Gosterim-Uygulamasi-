@@ -1,9 +1,8 @@
-import 'package:dunya_saatleri_gosterim_uygulamasi/pages/page_secondary.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../controller/primary_controller.dart';
-
+import '../element/page_primary_item_widget.dart';
 
 class PagePrimary extends StatefulWidget {
   List? timezoneList;
@@ -22,52 +21,62 @@ class _PagePrimaryState extends State<PagePrimary> {
     return Scaffold(
       key: _con.scaffoldKey,
       appBar: AppBar(
-        title: Text(""),
+        title: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Column(
+              children: [
+                Text("Günaydın Özgür",
+                    style: Theme.of(context).textTheme.headline2),
+                SizedBox(
+                  height: 3,
+                ),
+                Text("09 : 54", style: Theme.of(context).textTheme.headline2),
+                SizedBox(
+                  height: 3,
+                ),
+                Text("8 Haziran , Çarşamba",
+                    style: Theme.of(context).textTheme.headline2),
+              ],
+            ),
+            InkWell(
+              onTap: () {
+                Get.isDarkMode
+                    ? Get.changeThemeMode(ThemeMode.light)
+                    : Get.changeThemeMode(ThemeMode.dark);
+              },
+              child: Container(
+                  height: 35,
+                  width: 35,
+                  decoration: BoxDecoration(
+                      color: Theme.of(context).canvasColor,
+                      borderRadius: BorderRadius.circular(18)),
+                  child: Icon(
+                      Get.isDarkMode
+                          ? Icons.light_mode_outlined
+                          : Icons.dark_mode_outlined,
+                      color: Theme.of(context).focusColor)),
+            )
+          ],
+        ),
         toolbarHeight: 150,
         leadingWidth: 0,
         leading: Text(""),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20),
         ),
-        actions: [
-          InkWell(
-            onTap: () {
-              Get.isDarkMode ? Get.changeThemeMode(ThemeMode.light):Get.changeThemeMode(ThemeMode.dark);
-            },
-            child:   Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Icon(Get.isDarkMode ? Icons.light_mode_outlined:Icons.dark_mode_outlined),
-            ),
-          )
-        ],
       ),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
-        child: Column(
-          children: List.generate(widget.timezoneList!.length, (index) {
-            return Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ListTile(
-                onTap: () {
-                  Get.to(PageSecondary(
-                    timezoneName: widget.timezoneList![index],
-                  ));
-                },
-                trailing: Icon(Icons.arrow_forward_ios_sharp),
-                leading: Text(widget.timezoneList![index]),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15),
-                  side: BorderSide(
-                    color: Colors.black,
-                  ),
-                ),
-                contentPadding: EdgeInsets.symmetric(
-                  vertical: 8,
-                  horizontal: 16,
-                ),
-              ),
-            );
-          }),
+        child: Container(
+          alignment: Alignment.center,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: List.generate(widget.timezoneList!.length, (index) {
+              return PagePrimaryItemWidget(
+                  timezoneName: widget.timezoneList![index]);
+            }),
+          ),
         ),
       ),
     );

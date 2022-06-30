@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.dunya_saatleri_gosterim_uygulamasi">
    <application
-        android:label="dunya_saatleri_gosterim_uygulamasi"
+        android:label="dunya saatleri gosterim"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

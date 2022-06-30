@@ -56,6 +56,7 @@ ThemeData darkTheme = ThemeData(
     canvasColor: AppColors.textColorDark,
     primaryColor: AppColors.backgraundDark,
     cardColor: AppColors.backgraundDarkAcik,
+    focusColor: AppColors.backgraundDarkAcik,
     appBarTheme: AppBarTheme(backgroundColor: AppColors.backgraundDarkAcik),
     textTheme: TextTheme(
       headline1: TextStyle(
@@ -88,6 +89,7 @@ ThemeData lightTheme = ThemeData(
     canvasColor: AppColors.textColorLight,
     primaryColor: AppColors.backgraundLight,
     cardColor: AppColors.backgraundLight,
+    focusColor: AppColors.backgraundLightKoyu,
     appBarTheme: AppBarTheme(backgroundColor: AppColors.backgraundLightKoyu),
     textTheme: TextTheme(
       headline1: TextStyle(
