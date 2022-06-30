@@ -21,6 +21,7 @@ class _PageSplashState extends State<PageSplash> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.backgraundDark,
       key: _con.scaffoldKey,
       body: Container(
         alignment: Alignment.center,

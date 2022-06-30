@@ -36,13 +36,13 @@ class App {
   }
 }
 
-
 class AppColors {
   static Color backgraundDark = const Color(0xFF002359);
+
   static Color backgraundDarkAcik = const Color(0xFF02327E);
 
   static Color backgraundLight = const Color(0xffffffff);
-  static Color backgraundLightKoyu = const Color(0xFF39547D);
+  static Color backgraundLightKoyu = const Color(0xFFb8b4da);
 
   static Color textColorDark = const Color(0xffffffff);
   static Color textColorLight = const Color(0xFF002359);
@@ -56,15 +56,56 @@ ThemeData darkTheme = ThemeData(
     primaryColor: AppColors.backgraundDark,
     cardColor: AppColors.backgraundDarkAcik,
     appBarTheme: AppBarTheme(backgroundColor: AppColors.backgraundDarkAcik),
-    textTheme: TextTheme(headline1: TextStyle(color: AppColors.textColorLight))
-);
+    textTheme: TextTheme(
+      headline1: TextStyle(
+          fontSize: 18.0,
+          fontWeight: FontWeight.w100,
+          color: AppColors.textColorDark,
+          height: 1.0),
+      headline2: TextStyle(
+          fontSize: 20.0,
+          fontWeight: FontWeight.w500,
+          color: AppColors.textColorDark,
+          height: 1.0),
+      headline3: TextStyle(
+          fontSize: 45.0,
+          fontWeight: FontWeight.w500,
+          color: AppColors.textColorDark,
+          height: 1.0),
+      headline4: TextStyle(
+          fontSize: 20.0,
+          fontWeight: FontWeight.w700,
+          color: AppColors.textColorDark,
+          height: 1.0),
+    ));
 
 ThemeData lightTheme = ThemeData(
     brightness: Brightness.light,
     backgroundColor: AppColors.backgraundLight,
     scaffoldBackgroundColor: AppColors.backgraundLight,
-    hintColor: AppColors.textColorLight,
+    hintColor: AppColors.textColorDark,
     primaryColor: AppColors.backgraundLight,
-    cardColor: AppColors.backgraundLightKoyu,
+    cardColor: AppColors.backgraundLight,
     appBarTheme: AppBarTheme(backgroundColor: AppColors.backgraundLightKoyu),
-    textTheme: TextTheme(headline1: TextStyle(color: AppColors.textColorDark)));
+    textTheme: TextTheme(
+      headline1: TextStyle(
+          fontSize: 18.0,
+          fontWeight: FontWeight.w100,
+          color: AppColors.textColorLight,
+          height: 1.0),
+      headline2: TextStyle(
+          fontSize: 20.0,
+          fontWeight: FontWeight.w500,
+          color: AppColors.textColorLight,
+          height: 1.0),
+      headline3: TextStyle(
+          fontSize: 45.0,
+          fontWeight: FontWeight.w500,
+          color: AppColors.textColorLight,
+          height: 1.0),
+      headline4: TextStyle(
+          fontSize: 20.0,
+          fontWeight: FontWeight.w700,
+          color: AppColors.textColorLight,
+          height: 1.0),
+    ));
