@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:get/get.dart';import '../pages/page_primary.dart';
+
 import '../repository/clock_repository.dart' as api;
 
 class SplashController {
@@ -14,7 +15,7 @@ class SplashController {
     timezoneList = await api.getTimezoneList();
     if (timezoneList!.isNotEmpty) {
       //   Apiden gelen timezone listesi alındı. Ve anasayfaya geçiliyor...
-     // Get.to(PagePrimary(timezoneList: timezoneList));
+      Get.to(PagePrimary(timezoneList: timezoneList));
 
     }
   }
