@@ -13,7 +13,11 @@ class PageSplash extends StatefulWidget {
 
 class _PageSplashState extends State<PageSplash> {
   final SplashController _con = Get.put(SplashController());
-
+  @override
+  void initState() {
+    _con.getTimezoneList();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
