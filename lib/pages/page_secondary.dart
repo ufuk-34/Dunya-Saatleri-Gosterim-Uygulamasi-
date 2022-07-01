@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../controller/secondary_controller.dart';
+import '../controller/main_controller.dart';
 import '../helper/app_config.dart';
 
 class PageSecondary extends StatefulWidget {
@@ -13,7 +13,7 @@ class PageSecondary extends StatefulWidget {
 }
 
 class _PageSecondaryState extends State<PageSecondary> {
-  final SecondaryController _con = Get.put(SecondaryController());
+  final MainController _con = Get.put(MainController());
 
   @override
   void initState() {

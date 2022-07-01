@@ -2,19 +2,32 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../model/clock.dart';
 import '../repository/clock_repository.dart' as api;
+import 'package:intl/intl.dart';
+import 'package:intl/date_symbol_data_local.dart';
 
-class SecondaryController {
+
+class MainController {
   GlobalKey<ScaffoldState>? scaffoldKey;
 
   Rx<Clock?> clock = Clock().obs;
+
   Rx<String?> saat = "".obs;
   Rx<String?> dk = "".obs;
-
   Rx<String?> year = "".obs;
   Rx<String?> month = "".obs;
   Rx<String?> day = "".obs;
 
-  SecondaryController() {
+  Rx<String?> yearNow = "".obs;
+  Rx<int?> monthNow = 0.obs;
+  Rx<int?> dayNow = 0.obs;
+  Rx<String?> dayNameNow = "".obs;
+
+  ScrollController rrectController = ScrollController();
+  int pageNo = 1;
+  List? timezoneList = [];
+  Rx<int?> showCount = 10.obs;
+
+  MainController() {
     this.scaffoldKey = new GlobalKey<ScaffoldState>();
   }
 
@@ -22,25 +35,25 @@ class SecondaryController {
     clock.value = await api.getTimezone(timezone);
     clock.refresh();
     print(clock.value!.dayOfWeek.toString());
-    if(clock.value !=null){
+    if (clock.value != null) {
       dateTimeSplitFunc(clock.value!.datetime!);
     }
   }
 
-  void dateTimeSplitFunc(String  datetime) async {
+  void dateTimeSplitFunc(String datetime) async {
     //2022-06-30T11:28:20.697594+00:00
-    String saatBilgisi=   datetime.split("T").last.split(".").first;  // 11:28:20
-    saat.value=  saatBilgisi.split(":")[0];
-    dk.value=  saatBilgisi.split(":")[1];
+    String saatBilgisi = datetime.split("T").last.split(".").first; // 11:28:20
+    saat.value = saatBilgisi.split(":")[0];
+    dk.value = saatBilgisi.split(":")[1];
     saat.refresh();
     dk.refresh();
 
-    String yilBilgisi=datetime.split("T").first;  // 2022-06-30
-    year.value=yilBilgisi.split("-")[0];
-    day.value=yilBilgisi.split("-")[2];
+    String yilBilgisi = datetime.split("T").first; // 2022-06-30
+    year.value = yilBilgisi.split("-")[0];
+    day.value = yilBilgisi.split("-")[2];
 
-    int monthNumber=int.parse(yilBilgisi.split("-")[1]);
-    month.value=getMonthNameWithNumber(monthNumber);
+    int monthNumber = int.parse(yilBilgisi.split("-")[1]);
+    month.value = getMonthNameWithNumber(monthNumber);
 
     year.refresh();
     month.refresh();
@@ -62,7 +75,7 @@ class SecondaryController {
       case 4:
         dayName = "Perşembe";
         break;
-       case 5:
+      case 5:
         dayName = "Cuma";
         break;
       case 6:
@@ -117,4 +130,19 @@ class SecondaryController {
     }
     return dayName;
   }
+
+  void getDateNow() async{
+    yearNow.value = DateTime.now().year.toString();
+    monthNow.value = DateTime.now().month;
+    dayNow.value = DateTime.now().day;
+
+   await initializeDateFormatting('tr');
+    dayNameNow.value = DateFormat('EEEE').format(DateTime.now());  // perşembe
+    yearNow.refresh();
+    monthNow.refresh();
+    dayNow.refresh();
+    dayNameNow.refresh();
+  }
+
+
 }

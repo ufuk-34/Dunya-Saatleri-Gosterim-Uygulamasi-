@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../controller/primary_controller.dart';
+import '../controller/main_controller.dart';
 import '../element/page_primary_item_widget.dart';
 import '../helper/app_config.dart';
-
+import 'package:slide_digital_clock/slide_digital_clock.dart';
 class PagePrimary extends StatefulWidget {
   List? timezoneList;
 
@@ -15,11 +14,12 @@ class PagePrimary extends StatefulWidget {
 }
 
 class _PagePrimaryState extends State<PagePrimary> {
-  final PrimaryController _con = Get.put(PrimaryController());
+  final MainController _con = Get.put(MainController());
 
 
   @override
   void initState() {
+  _con.getDateNow();
     _con.timezoneList=widget.timezoneList;
     super.initState();
   }
@@ -36,14 +36,22 @@ class _PagePrimaryState extends State<PagePrimary> {
               children: [
                 Text("Günaydın Özgür",
                     style: Theme.of(context).textTheme.headline2),
-                SizedBox(
+                const SizedBox(
                   height: 3,
                 ),
-                Text("09 : 54", style: Theme.of(context).textTheme.headline2),
-                SizedBox(
+        DigitalClock(
+          areaDecoration: BoxDecoration(color: Colors.transparent),
+          areaAligment: AlignmentDirectional.center,
+          hourMinuteDigitDecoration:
+          BoxDecoration(color: Colors.transparent),
+          hourMinuteDigitTextStyle: TextStyle(fontSize: 35,color: Theme.of(context).canvasColor),
+          showSecondsDigit: false,
+
+        ),
+                const SizedBox(
                   height: 3,
                 ),
-                Text("8 Haziran , Çarşamba",
+                Text("${_con.dayNow.value!}  ${_con.getMonthNameWithNumber(_con.monthNow.value!)} , ${_con.dayNameNow.value!}",
                     style: Theme.of(context).textTheme.headline2),
               ],
             ),
@@ -85,7 +93,7 @@ class _PagePrimaryState extends State<PagePrimary> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
-              children: List.generate(_con.gosterimSayisi.value!, (index) {
+              children: List.generate(_con.showCount.value!, (index) {
                 return PagePrimaryItemWidget(
                     timezoneName: widget.timezoneList![index]);
               }),
@@ -99,15 +107,15 @@ class _PagePrimaryState extends State<PagePrimary> {
               1000.0) {
             _con.pageNo++;
            print("Timezone listesine 10 tane daha ekle ve listeyi güncelle");
-           if(widget.timezoneList!.length > _con.gosterimSayisi.value!){
-             if(widget.timezoneList!.length - _con.gosterimSayisi.value!<10){
-               _con.gosterimSayisi.value=  _con.gosterimSayisi.value!+widget.timezoneList!.length - _con.gosterimSayisi.value!;
-               _con.gosterimSayisi.refresh();
-               print("${_con.gosterimSayisi} tane gösteriliyor...");
+           if(widget.timezoneList!.length > _con.showCount.value!){
+             if(widget.timezoneList!.length - _con.showCount.value!<10){
+               _con.showCount.value=  _con.showCount.value!+widget.timezoneList!.length - _con.showCount.value!;
+               _con.showCount.refresh();
+               print("${_con.showCount} tane gösteriliyor...");
              }else{
-               _con.gosterimSayisi.value=  _con.gosterimSayisi.value!+10;
-               _con.gosterimSayisi.refresh();
-               print("${_con.gosterimSayisi} tane gösteriliyor...");
+               _con.showCount.value=  _con.showCount.value!+10;
+               _con.showCount.refresh();
+               print("${_con.showCount} tane gösteriliyor...");
              }
 
            }else{

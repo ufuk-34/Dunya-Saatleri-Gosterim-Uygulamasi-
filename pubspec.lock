@@ -95,6 +95,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "4.0.1"
+  intl:
+    dependency: "direct dev"
+    description:
+      name: intl
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.17.0"
   lints:
     dependency: transitive
     description:
@@ -135,6 +142,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.99"
+  slide_digital_clock:
+    dependency: "direct dev"
+    description:
+      name: slide_digital_clock
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.0.2"
   source_span:
     dependency: transitive
     description:
