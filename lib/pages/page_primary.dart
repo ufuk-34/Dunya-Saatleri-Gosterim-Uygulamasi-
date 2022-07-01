@@ -31,63 +31,75 @@ class _PagePrimaryState extends State<PagePrimary> {
     return Scaffold(
       key: _con.scaffoldKeyPrimary,
       appBar: AppBar(
-        title: Column(
-          children: [
-            Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Column(
-                  children: [
-                    Text("Günaydın Özgür",
-                        style: Theme.of(context).textTheme.headline2),
-                    const SizedBox(
-                      height: 3,
-                    ),
-            DigitalClock(
-              areaDecoration: BoxDecoration(color: Colors.transparent),
-              areaAligment: AlignmentDirectional.center,
-              hourMinuteDigitDecoration:
-              BoxDecoration(color: Colors.transparent),
-              hourMinuteDigitTextStyle: TextStyle(fontSize: 35,color: Theme.of(context).canvasColor),
-              showSecondsDigit: false,
-
-            ),
-                    const SizedBox(
-                      height: 3,
-                    ),
-                    Text("${_con.dayNow.value!}  ${_con.getMonthNameWithNumber(_con.monthNow.value!)} , ${_con.dayNameNow.value!}",
-                        style: Theme.of(context).textTheme.headline2),
-                  ],
+        bottom: PreferredSize(
+            preferredSize: Size.fromHeight(8.0),
+            child: Container(
+              height: 40,
+              width: App(context).appWidth(75),
+              decoration: BoxDecoration(color: AppColors.backgraundLight,
+                  borderRadius: BorderRadius.circular(20)
+              ),
+              child: Padding(
+                padding: const EdgeInsets.only(left: 8.0),
+                child: TextField(
+                  style: TextStyle(color: AppColors.backgraundDarkAcik),
+                  onChanged: (value) => _con.filterList(value),
+                  decoration:   InputDecoration(
+                    border: InputBorder.none,
+                    labelText: 'Search',
+                    labelStyle:TextStyle(color: AppColors.backgraundDarkAcik) ,
+                    prefixIcon: Icon(Icons.search,color : AppColors.backgraundDarkAcik,),
+                  ),
                 ),
-                SizedBox(),
-                InkWell(
-                  onTap: () {
-                    Get.isDarkMode
-                        ? Get.changeThemeMode(ThemeMode.light)
-                        : Get.changeThemeMode(ThemeMode.dark);
-                  },
-                  child: Container(
-                      height: 35,
-                      width: 35,
-                      decoration: BoxDecoration(
-                          border: Border.all(width: 2,color: AppColors.backgraundLightKoyu),
-                          color: Theme.of(context).canvasColor,
-                          borderRadius: BorderRadius.circular(18)),
-                      child: Icon(
-                          Get.isDarkMode
-                              ? Icons.light_mode_outlined
-                              : Icons.dark_mode_outlined,
-                          color: Theme.of(context).focusColor,size: 20)),
-                )
+              ),
+            )),
+
+        title: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Column(
+              children: [
+                Text("Günaydın Özgür",
+                    style: Theme.of(context).textTheme.headline2),
+                const SizedBox(
+                  height: 3,
+                ),
+        DigitalClock(
+          areaDecoration: BoxDecoration(color: Colors.transparent),
+          areaAligment: AlignmentDirectional.center,
+          hourMinuteDigitDecoration:
+          BoxDecoration(color: Colors.transparent),
+          hourMinuteDigitTextStyle: TextStyle(fontSize: 35,color: Theme.of(context).canvasColor),
+          showSecondsDigit: false,
+
+        ),
+                const SizedBox(
+                  height: 3,
+                ),
+                Text("${_con.dayNow.value!}  ${_con.getMonthNameWithNumber(_con.monthNow.value!)} , ${_con.dayNameNow.value!}",
+                    style: Theme.of(context).textTheme.headline2),
               ],
             ),
-            TextField(
-              onChanged: (value) => _con.filterList(value),
-              decoration: const InputDecoration(
-                labelText: 'Search',
-                suffixIcon: Icon(Icons.search),
-              ),
-            ),
+            SizedBox(),
+            InkWell(
+              onTap: () {
+                Get.isDarkMode
+                    ? Get.changeThemeMode(ThemeMode.light)
+                    : Get.changeThemeMode(ThemeMode.dark);
+              },
+              child: Container(
+                  height: 35,
+                  width: 35,
+                  decoration: BoxDecoration(
+                      border: Border.all(width: 2,color: AppColors.backgraundLightKoyu),
+                      color: Theme.of(context).canvasColor,
+                      borderRadius: BorderRadius.circular(18)),
+                  child: Icon(
+                      Get.isDarkMode
+                          ? Icons.light_mode_outlined
+                          : Icons.dark_mode_outlined,
+                      color: Theme.of(context).focusColor,size: 20)),
+            )
           ],
         ),
         toolbarHeight: 150,
