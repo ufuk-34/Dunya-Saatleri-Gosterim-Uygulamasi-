@@ -20,61 +20,74 @@ class _PagePrimaryState extends State<PagePrimary> {
   @override
   void initState() {
   _con.getDateNow();
+   _con.foundList.value=widget.timezoneList!;
     _con.timezoneList=widget.timezoneList;
+    _con.foundList.refresh();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: _con.scaffoldKey,
+      key: _con.scaffoldKeyPrimary,
       appBar: AppBar(
-        title: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          crossAxisAlignment: CrossAxisAlignment.start,
+        title: Column(
           children: [
-            Column(
+            Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("Günaydın Özgür",
-                    style: Theme.of(context).textTheme.headline2),
-                const SizedBox(
-                  height: 3,
-                ),
-        DigitalClock(
-          areaDecoration: BoxDecoration(color: Colors.transparent),
-          areaAligment: AlignmentDirectional.center,
-          hourMinuteDigitDecoration:
-          BoxDecoration(color: Colors.transparent),
-          hourMinuteDigitTextStyle: TextStyle(fontSize: 35,color: Theme.of(context).canvasColor),
-          showSecondsDigit: false,
+                Column(
+                  children: [
+                    Text("Günaydın Özgür",
+                        style: Theme.of(context).textTheme.headline2),
+                    const SizedBox(
+                      height: 3,
+                    ),
+            DigitalClock(
+              areaDecoration: BoxDecoration(color: Colors.transparent),
+              areaAligment: AlignmentDirectional.center,
+              hourMinuteDigitDecoration:
+              BoxDecoration(color: Colors.transparent),
+              hourMinuteDigitTextStyle: TextStyle(fontSize: 35,color: Theme.of(context).canvasColor),
+              showSecondsDigit: false,
 
-        ),
-                const SizedBox(
-                  height: 3,
+            ),
+                    const SizedBox(
+                      height: 3,
+                    ),
+                    Text("${_con.dayNow.value!}  ${_con.getMonthNameWithNumber(_con.monthNow.value!)} , ${_con.dayNameNow.value!}",
+                        style: Theme.of(context).textTheme.headline2),
+                  ],
                 ),
-                Text("${_con.dayNow.value!}  ${_con.getMonthNameWithNumber(_con.monthNow.value!)} , ${_con.dayNameNow.value!}",
-                    style: Theme.of(context).textTheme.headline2),
+                SizedBox(),
+                InkWell(
+                  onTap: () {
+                    Get.isDarkMode
+                        ? Get.changeThemeMode(ThemeMode.light)
+                        : Get.changeThemeMode(ThemeMode.dark);
+                  },
+                  child: Container(
+                      height: 35,
+                      width: 35,
+                      decoration: BoxDecoration(
+                          border: Border.all(width: 2,color: AppColors.backgraundLightKoyu),
+                          color: Theme.of(context).canvasColor,
+                          borderRadius: BorderRadius.circular(18)),
+                      child: Icon(
+                          Get.isDarkMode
+                              ? Icons.light_mode_outlined
+                              : Icons.dark_mode_outlined,
+                          color: Theme.of(context).focusColor,size: 20)),
+                )
               ],
             ),
-            SizedBox(),
-            InkWell(
-              onTap: () {
-                Get.isDarkMode
-                    ? Get.changeThemeMode(ThemeMode.light)
-                    : Get.changeThemeMode(ThemeMode.dark);
-              },
-              child: Container(
-                  height: 35,
-                  width: 35,
-                  decoration: BoxDecoration(
-                      border: Border.all(width: 2,color: AppColors.backgraundLightKoyu),
-                      color: Theme.of(context).canvasColor,
-                      borderRadius: BorderRadius.circular(18)),
-                  child: Icon(
-                      Get.isDarkMode
-                          ? Icons.light_mode_outlined
-                          : Icons.dark_mode_outlined,
-                      color: Theme.of(context).focusColor,size: 20)),
-            )
+            TextField(
+              onChanged: (value) => _con.filterList(value),
+              decoration: const InputDecoration(
+                labelText: 'Search',
+                suffixIcon: Icon(Icons.search),
+              ),
+            ),
           ],
         ),
         toolbarHeight: 150,
@@ -93,9 +106,9 @@ class _PagePrimaryState extends State<PagePrimary> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
-              children: List.generate(_con.showCount.value!, (index) {
+              children: List.generate(_con.foundList.length<10?_con.foundList.length: _con.showCount.value!, (index) {
                 return PagePrimaryItemWidget(
-                    timezoneName: widget.timezoneList![index]);
+                    timezoneName: _con.foundList[index]);
               }),
             ),
           ),
@@ -107,9 +120,9 @@ class _PagePrimaryState extends State<PagePrimary> {
               1000.0) {
             _con.pageNo++;
            print("Timezone listesine 10 tane daha ekle ve listeyi güncelle");
-           if(widget.timezoneList!.length > _con.showCount.value!){
-             if(widget.timezoneList!.length - _con.showCount.value!<10){
-               _con.showCount.value=  _con.showCount.value!+widget.timezoneList!.length - _con.showCount.value!;
+           if(_con.foundList.length > _con.showCount.value!){
+             if(_con.foundList.length - _con.showCount.value!<10){
+               _con.showCount.value=  _con.showCount.value!+_con.foundList.length - _con.showCount.value!;
                _con.showCount.refresh();
                print("${_con.showCount} tane gösteriliyor...");
              }else{

@@ -8,6 +8,7 @@ import 'package:intl/date_symbol_data_local.dart';
 
 class MainController {
   GlobalKey<ScaffoldState>? scaffoldKey;
+  GlobalKey<ScaffoldState>? scaffoldKeyPrimary;
 
   Rx<Clock?> clock = Clock().obs;
 
@@ -145,4 +146,20 @@ class MainController {
   }
 
 
+  /// Search kodları
+RxList<dynamic> foundList=[].obs;
+  void filterList(String searchInput) {
+    List<dynamic> results = [];
+    if (searchInput.isEmpty) {
+      results = timezoneList!;
+    } else {
+      results = timezoneList!
+          .where((element) => element
+          .toString()
+          .toLowerCase()
+          .contains(searchInput.toLowerCase()))
+          .toList();
+    }
+    foundList.value = results;
+  }
 }
