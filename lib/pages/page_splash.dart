@@ -15,7 +15,7 @@ class _PageSplashState extends State<PageSplash> {
   final SplashController _con = Get.put(SplashController());
   @override
   void initState() {
-    _con.getTimezoneList();
+    _con.getTimezoneList(context);
     super.initState();
   }
   @override
